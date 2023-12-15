@@ -20,10 +20,17 @@ def part2():
         data=list(filter(None,f.read().split('\n')))
     time=int("".join(data[0].split()[1:]))
     lens=int("".join(data[1].split()[1:]))
-    for i in range(time):
+    low,high=0,time
+    while True:
+        i=(high+low)//2
         if (time-i)*i>=lens:
-            tot=time+1-2*i
-            break
+            if (time-i-1)*(i-1)<lens:
+                tot=time+1-2*i
+                break
+            else:
+                high=i
+        else:
+            low=i
     print(tot)
     return
 
